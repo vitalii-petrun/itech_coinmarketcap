@@ -5,21 +5,21 @@ class Header extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = `
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
         <header>
-        <div class="logo">
-            <img src="../assets/site-logo.png"  >
-            <h1>CryptoWebsite</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Cryptocurrencies </a></li>
-                <li><a href="#">Exchanges</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Learn</a></li>
-            </ul>
-        </nav>
-    </header>
+            <div class="logo">
+                <img src="../assets/site-logo.png"  >
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../pages/home.php">Home </a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Some Link</a></li>
+                    <li><a href="#">Some Link</a></li>
+                    <li><a href="#">Some Link</a></li>
+                </ul>
+            </nav>
+        </header>
         `;
     }
 }

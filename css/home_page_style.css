@@ -6,21 +6,61 @@ body {
     align-items: center;
 }
 
+
+h1 {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+
+}
+
+.table_container {
+    width: 80vw;
+    margin: 0 auto;
+}
+
+#crypto_table {
+    table-layout: fixed;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
 th,
 td {
     padding: 14px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
 td {
-    width: 90%;
+    width: 15%;
     font-size: 20px;
     color: #333;
 }
 
+td.positive {
+    color: green;
+    background-color: #d4edda;
+    border-radius: 8px;
+
+}
+
+td.negative {
+    color: red;
+    background-color: #f8d7da;
+    border-radius: 8px;
+}
+
 a {
     text-decoration: none;
+    transition: color 0.2s ease-in-out;
 }
 
 a:link {
@@ -38,53 +78,20 @@ a:active {
 th.width-10,
 td.width-10 {
     width: 20px;
+    text-align: left;
 }
 
 th.width-80,
 td.width-80 {
-    width: 300px;
+    width: 30%;
+    text-align: left;
 }
 
-#crypto_table {
-    table-layout: fixed;
-    width: 1000px;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
-    border-radius: 45px;
-    align-items: first baseline;
+.sized_box {
+    height: 100px;
 }
 
 .logo {
-
     height: 22px;
     margin-right: 10px;
-}
-
-h1 {
-    font-size: 48px;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-p {
-    font-size: 18px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn:hover {
-    background-color: #0062cc;
 }

@@ -2,42 +2,51 @@
 
 <head>
     <title> </title>
-    <link rel="stylesheet" type="text/css" href="../css/coin_detailed.css">
+    <link rel="stylesheet" type="text/css" href="../css/coin_detailed.css?v=2">
+    <script src="../js/header.js" type="text/javascript" defer></script>
 </head>
 
-<body> <a href="home.php">Back</a>
-    <header>
-        <h1>Crypto Coin Info</h1>
-        <ul>
-            <li><a href="home.php">Home</a></li>
-        </ul>
-    </header>
-    <?php
-    $id = $_GET['id'];
-    require_once '../api/api_repository.php';
-    require_once '../api/entities/crypto.php';
- 
-    $api_repository = new ApiRepository();
-    $json_data = $api_repository->getObjectById($id);
-
-    $crypto = new Crypto($json_data->data->$id);
-    echo "<br> ";
-    echo "<br> ";
-    echo "crypto name: " . $crypto->name;
-    echo "<br> ";
-    echo "crypto symbol: " . $crypto->symbol;
-    echo "<br> ";
-    echo "crypto slug: " . $crypto->slug;
-    echo "<br> ";
-    echo "crypto num_market_pairs: " . $crypto->num_market_pairs;
-    echo "<br> ";
-    echo "crypto date_added: " . $crypto->date_added;
-    echo "<br> ";
-    echo "crypto tags: " . $crypto->tags;
-
-    ?>
+<body>
+    <header-widget></header-widget>
+    <div class='sized_box'> </div>
 
     <main>
+        <?php
+        $id = $_GET['id'];
+        require_once '../api/api_repository.php';
+        require_once '../api/entities/crypto.php';
+
+        $api_repository = new ApiRepository();
+        $coin = $api_repository->getObjectById($id);
+        $metadata = $api_repository->getMetadataById($id);
+
+        $crypto = new Crypto($coin->data, $id);
+        $crypto->metadata = $metadata->data->$id;
+
+
+        echo "<div class='coin_info'>";
+        echo "<div class='left_side'>";
+        echo "<div class='logo_row panel'>";
+        echo "<img src='" . $crypto->metadata->logo . "' class='coin_logo'>";
+        echo "<h1>" . $crypto->name . " (" . $crypto->symbol . ")" . "</h1>";
+        echo "</div>";
+        echo "<p class='description_text panel'>" . $crypto->metadata->description . "</p>";
+        echo "<div class='links'>";
+        echo "<a href='" . $crypto->metadata->urls->website[0] . "'>🔗 Website</a>";
+        echo "<a href='" . $crypto->metadata->urls->twitter[0] . "'>🔗 Twitter </a>";
+        echo "<a href='" . $crypto->metadata->urls->reddit[0] . "'  >🔗 Reddit</a>";
+        echo "<a href='" . $crypto->metadata->urls->technical_doc[0] . "'  '>🔗 Whitepaper</a>";
+        echo "</div>";
+        echo "</div>";
+
+        echo "<div class='price_changes_info  panel'>";
+        echo "<h2>Price: " . round($crypto->quote->price, 2) . " $</h2>";
+        echo "<h2>Circulating Supply: " . round($crypto->circulating_supply, 2) . " " . $crypto->symbol . "</h2>";
+        echo "<h2>Market Cap: " . round($crypto->quote->market_cap, 2) . " $</h2>";
+        echo "</div>";
+
+
+        ?>
 
     </main>
     <footer>
