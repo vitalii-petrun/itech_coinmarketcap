@@ -1,6 +1,4 @@
 <?php
-
-
 class Metadata
 {
     public $id;

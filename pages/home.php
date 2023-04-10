@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home Page | Crypto Prices</title>
+    <title>Home | Crypto Prices</title>
     <link rel="stylesheet" type="text/css" href="../css/home_page_style.css?v=2">
     <script src="../js/header.js" type="text/javascript" defer></script>
     <script src="../js/price_change_cell_color.js" type="text/javascript" defer></script>
@@ -15,27 +15,9 @@
     <div class='sized_box'> </div>
     <main>
         <?php
-        require_once '../api/api_repository.php';
-        require_once '../api/entities/crypto.php';
+        require_once '../api/get_crypto_call.php';
+        $result = getCryptoList();
 
-        $api_repository = new ApiRepository();
-        $json_data = $api_repository->makeRequest();
-
-        $result = [];
-        if ($json_data->status->error_code != 0) {
-            echo "Error: " . $json_data->status->error_message;
-            exit();
-        } else
-            foreach ($json_data->data as $item) {
-                $id = $item->id;
-                $quote_request_data = $api_repository->getObjectById($id);
-                $metadata = $api_repository->getMetadataById($id);
-                $item->quote = $quote_request_data->data->$id->quote;
-                $item->metadata = $metadata->data->$id;
-
-                $crypto = new Crypto($item);
-                array_push($result, $crypto);
-            }
         echo "<div class='table_container'> ";
         echo "<table id='crypto_table'>";
         echo "<tr>";
@@ -68,5 +50,7 @@
         <p>&copy; 2023 My Crypto Website. All rights reserved.</p>
     </footer>
 </body>
+
+
 
 </html>

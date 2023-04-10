@@ -13,16 +13,11 @@
     <main>
         <?php
         $id = $_GET['id'];
-        require_once '../api/api_repository.php';
-        require_once '../api/entities/crypto.php';
+        require_once '../api/get_crypto_call.php';
+        $crypto = getСryptoById($id);
 
-        $api_repository = new ApiRepository();
-        $coin = $api_repository->getObjectById($id);
-        $metadata = $api_repository->getMetadataById($id);
-
-        $crypto = new Crypto($coin->data, $id);
-        $crypto->metadata = $metadata->data->$id;
-
+        echo "<script> var title = document.getElementsByTagName('title')[0];";
+        echo "title.innerHTML = '" . $crypto->name . " | Coin Details'; </script>";
 
         echo "<div class='coin_info'>";
         echo "<div class='left_side'>";
